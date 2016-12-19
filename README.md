@@ -1,4 +1,4 @@
-# Simpl Sendy
+# Simple Sendy
 
 With this simple class you can easily send transactional email via the [sendgrid](https://sendgrid.com/) api.
 
