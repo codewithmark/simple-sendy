@@ -1,4 +1,8 @@
 # simple-sendy
 
-This class will help send transaction via the sendgrid(https://sendgrid.com/) api
+This class will help send transactional email via the sendgrid(https://sendgrid.com/) api.
 
+### How To Use It
+
+	$sendy = new SimpleSendy("YourSendGridAPIKey");
+    
