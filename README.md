@@ -21,8 +21,7 @@ With this simple class you can easily send transactional email via the [sendgrid
         echo "email sent";
     }
     elseif ($d['status'] == 'error') 
-    {
-        # code...
+    {  
         echo "fail to sent email";
         echo "<br>";
 
@@ -30,6 +29,7 @@ With this simple class you can easily send transactional email via the [sendgrid
 
     }
 
+For more helpful tips, check out: [Code With Mark](http://codewithmark.com/)
 
     
     
