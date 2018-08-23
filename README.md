@@ -4,31 +4,35 @@ With this simple class you can easily send transactional email via the [sendgrid
 
 ### How To Use It
 
-	
-    include  'class_simple_sendy.php';
+
+	include  'class_simple_sendy.php';
  
-    //Your email variables
-$from_email = 'info@yoursite.com';
-$to_email  = 'useremail@gmail.com';
-$subject_line = "My First sendgrid email";
-$email_body = ' This is a test email sent via sendgrid api';
-    
-    $sendy = new SimpleSendy("YourSendGridAPIKey");
-    $d = $sendy->Mailer($from_email ,$to_email  ,$subject_line  , $email_body  );
-    
-    
-    if($d['status'] == 'success') 
-    {
-        echo "email sent";
-    }
-    elseif ($d['status'] == 'error') 
-    {  
-        echo "fail to sent email";
-        echo "<br>";
+	$sendy = new SimpleSendy("YourSendGridAPIKey");
 
-        var_dump($d);
+Simple Email to your users
+	 
+	//note "to_emails" can be single or multiple arrays
+	$d = $sendy->mailer(array(	 
+		'from_name' =>'Code With Mark ' ,
+		'from_email' =>'info@codewithmark.com' ,
+		'to_emails' =>array('test1@gmail.com','test2@gmail.com','test2@gmail.com'), //<<<add your users emails here in an array
+		'subject_line' =>'Test subject line...'.uniqid() ,	 
+		'email_body' => '<p>Testing 123.. .</p>
+		<h2>Your code > {user_code}</h2>'
+	));
 
-    }
+
+	if($d['status'] == 'success') 
+	{
+		echo "email sent";
+	}
+	elseif ($d['status'] == 'error') 
+	{  
+		echo "fail to sent email";
+		echo "<br>";
+
+		var_dump($d);
+	}
 
 For more helpful tips, check out: [Code With Mark](http://codewithmark.com/)
 
