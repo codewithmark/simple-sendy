@@ -11,6 +11,7 @@ With this simple class you can easily send transactional email via the [sendgrid
 
 Simple Email to your user
 Use it for transactional emails	 
+
 	//note "to_emails" can be single or multiple arrays
 	$d = $sendy->mailer(array(	 
 		'from_name' =>'Code With Mark ' ,
