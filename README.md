@@ -5,7 +5,8 @@ With this simple class you can easily send transactional email via the [sendgrid
 ### How To Use It
 
 	
-    
+    include  'class_simple_sendy.php';
+ 
     //Your email variables
     $from_email = 'info@yoursite.com';
 	$to_email  = 'useremail@gmail.com';
