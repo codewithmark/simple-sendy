@@ -9,8 +9,7 @@ With this simple class you can easily send transactional email via the [sendgrid
  
 	$sendy = new SimpleSendy("YourSendGridAPIKey");
 
-Simple Email to your user
-Use it for transactional emails	 
+Send simple transactional emails to your user(s)
 
 	//note "to_emails" can be single or multiple arrays
 	$d = $sendy->mailer(array(	 
