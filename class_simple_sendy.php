@@ -107,7 +107,7 @@ class SimpleSendy
 		if( isset($res['data']['errors']) && $res['http_code'] =400 )
 		{
 			$d = array(
-				'status'=>'error-099',				 
+				'status'=>'error',				 
 				'msg'=> $res['data']["errors"][0],
 			);
 
