@@ -34,7 +34,8 @@ class SimpleSendy
 		'email_body' =>null,
 		'future_timestamp' =>null,
 		'category' =>null,
-		'batch_id' =>null,) )
+		'batch_id' =>null,
+		'sub_tags' =>array()) )
 	{ 
 		$from_name 		= isset($call_arr['from_name']) ? $call_arr['from_name'] : 'GET' ;
 	    $from_email 	= isset($call_arr['from_email']) ? $call_arr['from_email'] : '' ;
@@ -44,6 +45,9 @@ class SimpleSendy
 	    $email_body 	= isset($call_arr['email_body']) ? $call_arr['email_body'] : '' ;
 
 	    $future_timestamp 	= isset($call_arr['future_timestamp']) ? strtotime($call_arr['future_timestamp']) : date('U') ;
+
+	    //if sub_tags are not set, then a test one will be set to work correctly 
+	    $sub_tags =  isset($call_arr['sub_tags']) ? $call_arr['sub_tags'] : array('{'.$this->AutoHash().'}'=>array('test')) ;
 
 
 	    
@@ -61,6 +65,7 @@ class SimpleSendy
 			'to' => $to_emails,		  
 		  	'category' => $category,
 		  	'send_at'	=> $future_timestamp,
+		  	'sub' => $sub_tags,
 
 			'unique_args' => array(
 				'batch_id'	=> $batch_id,	
@@ -240,6 +245,6 @@ class SimpleSendy
 	        return $time_stamp;
 	    }
 	}
-	//--->Local functions - End 
+	//--->Local functions - End
 }
-?>
+?> 
