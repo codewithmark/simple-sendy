@@ -41,6 +41,7 @@ This will come in handy if you are sending same email to multiple users but only
 		'from_name' =>'Code With Mark ' ,
 		'from_email' =>'info@apimk.com' ,
 		'to_emails' =>array('test1@gmail.com','test2@gmail.com' ),
+		'replyto_email'=>'info@gmail.com',
 		'subject_line' =>'Test subject line...',
 		'sub_tags'=>array('{user_name}' =>array('code with mark','Mike Cohen' ),'{user_code}'=> array('codewithmark-'.uniqid(),'mike-'.uniqid()) ),
 		'email_body' => '<h1>Hi{user_name}, </h1>
@@ -68,6 +69,7 @@ Send emails with more options.
 		'from_name' =>'Code With Mark ' ,
 		'from_email' =>'info@apimk.com' ,
 		'to_emails' =>array('test1@gmail.com','test2@gmail.com' ),
+		'replyto_email'=>'info@gmail.com',
 		'subject_line' =>'Test subject line...',
 		'sub_tags'=>array('{user_name}' =>array('code with mark','Mike Cohen' ),'{user_code}'=> array('codewithmark-'.uniqid(),'mike-'.uniqid()) ),
 		'email_body' => '<h1>Hi{user_name}, </h1>
