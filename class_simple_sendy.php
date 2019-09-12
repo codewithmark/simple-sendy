@@ -16,6 +16,7 @@ class SimpleSendy
 
 	//--->Get api key - Start 
 	public function __construct($api_key="your_api_key",$base_url = 'https://api.sendgrid.com/api/')
+
 	//https://api.sendgrid.com/v3/mail/send
 	{ 
 		$this->APIKey = $api_key;	 
@@ -30,16 +31,21 @@ class SimpleSendy
 		'from_name' =>null,	
 		'from_email' => null,
 		'to_emails' =>array(), 
+		'replyto_email'=>null,
 		'subject_line' =>null,
 		'email_body' =>null,
 		'future_timestamp' =>null,
 		'category' =>null,
 		'batch_id' =>null,
+		'trans_id' =>null,
 		'sub_tags' =>array()) )
 	{ 
 		$from_name 		= isset($call_arr['from_name']) ? $call_arr['from_name'] : 'GET' ;
 	    $from_email 	= isset($call_arr['from_email']) ? $call_arr['from_email'] : '' ;
 	    $to_emails 		= isset($call_arr['to_emails']) ? $call_arr['to_emails'] : '' ;
+		
+		 $replyto_email = isset($call_arr['replyto_email']) ? $call_arr['replyto_email'] :  $call_arr['from_email'] ;
+		
 	    $subject_line 	= isset($call_arr['subject_line']) ? $call_arr['subject_line'] : '' ;
 
 	    $email_body 	= isset($call_arr['email_body']) ? $call_arr['email_body'] : '' ;
@@ -56,6 +62,7 @@ class SimpleSendy
 
 		//More info check out: https://sendgrid.com/docs/API_Reference/Web_API/mail.html
 		$batch_id = isset($call_arr['batch_id']) ? $call_arr['batch_id'] : $this->AutoHash();
+		$trans_id =isset($call_arr['trans_id']) ? $call_arr['trans_id'] : $this->AutoHash();
 		
 		$category 	= isset($call_arr['category']) ? $call_arr['category'] : 'auto_cat_id_'.$batch_id ;
 
@@ -68,7 +75,8 @@ class SimpleSendy
 		  	'sub' => $sub_tags,
 
 			'unique_args' => array(
-				'batch_id'	=> $batch_id,	
+				'batch_id'	=> $batch_id,
+				'trans_id'	=>$trans_id,
 				'email_dispatch_dttm'=>	$future_timestamp,
 				'timestamp'=>$timestamp,
 			),
@@ -92,7 +100,7 @@ class SimpleSendy
 			'fromname' 	=> $from_name,
 			'from'      => $from_email,			
 			'to'        => $from_email, //--> It won't send the email to it... but you still need it for multiple recipients send...
-			//'replyto'	=> $replyto_email,
+			'replyto'	=> $replyto_email,
 			'subject'   => $subject_line,
 			'html'      => $email_body,
 			//'text'      => $email_body,
@@ -246,5 +254,4 @@ class SimpleSendy
 	    }
 	}
 	//--->Local functions - End
-}
-?> 
+} 
