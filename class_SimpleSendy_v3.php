@@ -234,6 +234,60 @@ class SimpleSendy
         return $this;
     }
 
+    public function emails(array $emailList): self
+    {
+        $this->emailType = 'multi-recipient';
+
+        // Convert email list to array of email objects
+        $toRecipients = [];
+        foreach ($emailList as $email) {
+            if (is_string($email)) {
+                $toRecipients[] = ['email' => $email];
+            } elseif (is_array($email) && isset($email['email'])) {
+                $toRecipients[] = $email;
+            }
+        }
+
+        if (empty($toRecipients)) {
+            throw new InvalidArgumentException("emails() requires a non-empty array of email addresses.");
+        }
+
+        $html = $this->rawHtml;
+        $plain = $this->rawPlain;
+
+        $trackingId = $this->trackingId ?? uniqid('track_', true);
+        $customArgs = array_merge(
+            [
+                'tracking_id' => $trackingId,
+                'email_type' => $this->emailType
+            ],
+            $this->emailData['custom_args_extra'] ?? []
+        );
+
+        $personalization = [
+            'to' => $toRecipients,
+            'subject' => $this->emailData['subject'] ?? '',
+            'custom_args' => $customArgs,
+        ];
+
+        if ($this->category) {
+            $personalization['category'] = [$this->category];
+        }
+
+        if ($this->sendAtTimestamp) {
+            $personalization['send_at'] = $this->sendAtTimestamp;
+        }
+
+        $this->personalizations[] = $personalization;
+
+        $this->emailData['per_recipient'][] = [
+            'html' => $html,
+            'plain' => $plain,
+        ];
+
+        return $this;
+    }
+
     public function broadcast(array $subscribers, array $dynamicKeys = [], array $fallbacks = []): self
     {
         $this->emailType = 'broadcast';
@@ -375,7 +429,5 @@ class SimpleSendy
         }
         return $chunks;
     }
-}
-
-
+} 
 ?>
